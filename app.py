@@ -1,7 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
-from project import Project
+from project import Project, ProjectStatus, ProjectRequest
 from fastapi.encoders import jsonable_encoder
 import json
 
@@ -28,21 +28,25 @@ async def get_project_by_id(project_id: int):
     return JSONResponse(status_code=404, content={"message": "El proyecto buscado no existe"})
 
 @app.post("/projects/", description="Create a new project", responses={404: {"model": Message}})
-async def create_project(project: Project):
+async def create_project(project_request: ProjectRequest):
     try:
-        projects.append(project)
-#        with open('projects_db.json', 'a') as projects_db:
-#            json.dump(jsonable_encoder(project), projects_db)
+        projects.append(create_new_project(project_request))
         return "todo ok!"
     except:
         return JSONResponse(status_code=404, content={"message": "Error al crear nuevo proyecto"})
 
+
+#esto deberia ir en el Service  
+def create_new_project(project_request: ProjectRequest):
+    new_project = Project(**project_request.dict(), estado = ProjectStatus.No_iniciado, porcentaje_de_avance = 0.0)
+    return new_project
+
 @app.put("/project/{project_id}", description="Update project by Id", responses={404: {"model": Message}})
-def update_project(project_id: int, new_project: Project):
+def update_project(project_id: int, new_project: ProjectRequest):
     for project in projects:
         if project.id == project_id:
             projects.remove(project)
-            projects.append(new_project)
+            projects.append(create_new_project(new_project))
             return "Se pudo actualizar el proyecto correctamente"
     return JSONResponse(status_code=404, content={"message": "No existe el proyecto que se desea actualizar"})
 
