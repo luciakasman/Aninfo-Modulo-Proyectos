@@ -3,7 +3,6 @@ from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 from project import Project
 from fastapi.encoders import jsonable_encoder
-from fastapi.responses import ORJSONResponse
 import json
 
 app = FastAPI()

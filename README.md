@@ -1,12 +1,12 @@
 # Aninfo-Módulo-Proyectos
 Módulo Proyectos del sistema para la empresa PSA - Análisis de la Información FIUBA
 
-# How to start:
+# Cómo comenzar:
 
-### Requirements:
+### Requerimientos:
 Python 3.6+
 
-## How to install FastAPI:
+## Cómo instalar FastAPI:
 ```
 pip install pipenv
 ```
@@ -17,18 +17,18 @@ sudo -H pipenv install fastapi uvicorn
 pipenv shell
 ```
 
-## How to run the server:
+## Cómo levantar el servidor:
 
 ```
 uvicorn app:app --reload
 ```
 
-The command refers to:
+El comando refiere a:
 
-**app**: the file app.py (the Python "module").
+**app**: el archivo app.py (el "módulo" de Python).
 
-**app**: the object created inside of app.py with the line app = FastAPI().
+**app**: el objeto creado adentro de app.py con la línea app = FastAPI().
 
-**--reload**: make the server restart after code changes. Only use for development.
+**--reload**: hace que el servidor se reinice después de un cambio en el código. Sólo se usa para desarrollo.
 
-This opens on localhost and port 8000 --> http://127.0.0.1:8000
+Esto levanta en localhost en el puerto 8000 --> http://127.0.0.1:8000

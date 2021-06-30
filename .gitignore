@@ -4,6 +4,9 @@
 !.vscode/launch.json
 !.vscode/extensions.json
 *.code-workspace
+*.lock
+Pipfile
+.DS_Store
 
 # Local History for Visual Studio Code
 .history/
