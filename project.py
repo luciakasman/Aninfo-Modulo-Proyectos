@@ -2,6 +2,9 @@ from typing import Optional, List
 from pydantic import BaseModel
 from enum import Enum
 
+class Message(BaseModel):
+    message: str
+    
 class ProjectStatus(str, Enum):
     No_iniciado = "No Iniciado"
     Iniciado = "Iniciado"

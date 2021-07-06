@@ -1,16 +1,16 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
-from project import Project, ProjectStatus, ProjectRequest
+from project import Project, ProjectStatus, ProjectRequest, Message
 from fastapi.encoders import jsonable_encoder
+from app.routers import taskController
 import json
 
 app = FastAPI()
 
-projects = []
+app.include_router(taskController.task_router)
 
-class Message(BaseModel):
-    message: str
+projects = []
 
 @app.get("/")
 def home():

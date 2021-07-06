@@ -7,12 +7,15 @@ Módulo Proyectos del sistema para la empresa PSA - Análisis de la Información
 Python 3.6+
 
 ## Cómo instalar FastAPI:
+Instalar el entorno virtual pipenv *[opcional]*:
 ```
 pip install pipenv
 ```
+Instalar FastAPI y uvicorn (necesario para manejar dependencias):
 ```
 sudo -H pipenv install fastapi uvicorn
 ```
+Activar el entorno virtual *[opcional]*:
 ```
 pipenv shell
 ```
@@ -20,7 +23,7 @@ pipenv shell
 ## Cómo levantar el servidor:
 
 ```
-uvicorn app:app --reload
+uvicorn main:app --reload
 ```
 
 El comando refiere a:

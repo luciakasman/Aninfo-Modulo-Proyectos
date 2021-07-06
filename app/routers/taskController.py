@@ -1,8 +1,7 @@
 #Asi propongo que se hagan los controladores por separado.
 
 from fastapi import APIRouter
-from app import Message
-from task import Task, TaskRequest
+from .task import Task, TaskRequest, Message
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 from fastapi.encoders import jsonable_encoder
