@@ -11,7 +11,7 @@ middleware = [
     Middleware(CORSMiddleware, allow_origins=origins)
 ]
 
-app = FastAPI()
+app = FastAPI(middleware=middleware)
 
 app.include_router(task_controller.router)
 app.include_router(project_controller.router)
