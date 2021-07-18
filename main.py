@@ -4,7 +4,7 @@ from starlette.middleware import Middleware
 from starlette.middleware.cors import CORSMiddleware
 
 origins = [
-    "http://localhost:5000",
+    "http://localhost:3000",
 ]
 
 middleware = [
