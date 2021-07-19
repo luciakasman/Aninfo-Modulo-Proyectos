@@ -1,5 +1,6 @@
 from typing import Optional, List
 from pydantic import BaseModel
+from .resources import Resource
 from enum import Enum
     
 class TaskStatus(str,Enum):
@@ -8,12 +9,12 @@ class TaskStatus(str,Enum):
     Terminado = "Terminado"
 
 class TaskRequest(BaseModel):
-    id: int
     name: str
     description: str
     associated_project_id: int
-    assigned_worker: int
+    assigned_worker: Resource
 
 class Task(TaskRequest):
+    id: int
     status: TaskStatus = TaskStatus.No_Iniciado
     

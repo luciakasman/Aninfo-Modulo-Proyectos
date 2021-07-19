@@ -2,6 +2,7 @@ from fastapi import APIRouter
 from .project import Project, ProjectStatus, ProjectRequest
 from .helper import Message
 from fastapi.responses import JSONResponse
+from uuid import uuid4
 
 router = APIRouter(
     prefix="/projects",
@@ -46,7 +47,5 @@ def delete_project(project_id: int):
             return "Se pudo eliminar el proyecto correctamente"
     return JSONResponse(status_code=404, content={"message": "No existe el proyecto que se desea eliminar"})
 
-# función extra 
 def create_new_project(project_request: ProjectRequest):
-    new_project = Project(**project_request.dict(), estado = ProjectStatus.No_iniciado, porcentaje_de_avance = 0.0)
-    return new_project
+    return Project(**project_request.dict(), id = int(uuid4()))

@@ -2,6 +2,7 @@ from fastapi import APIRouter
 from .task import Task, TaskRequest
 from .helper import Message
 from fastapi.responses import JSONResponse
+from uuid import uuid4
 
 router = APIRouter(
     prefix="/tasks",
@@ -46,7 +47,5 @@ def delete_task(task_id: int):
             return "Se pudo eliminar la tarea correctamente"
     return JSONResponse(status_code=404, content={"message": "No existe la tarea que se desea eliminar"})
 
-# función extra
 def create_new_task(task_request: TaskRequest):
-    new_task = Task(**task_request.dict())
-    return new_task
+    return Task(**task_request.dict(), id = int(uuid4()))
