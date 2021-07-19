@@ -3,15 +3,17 @@ from app.routers import task_controller, project_controller
 from starlette.middleware import Middleware
 from starlette.middleware.cors import CORSMiddleware
 
-origins = [
-    "http://localhost:3000",
-]
+app = FastAPI()
 
-middleware = [
-    Middleware(CORSMiddleware, allow_origins=origins)
-]
+origins = ["*"]
 
-app = FastAPI(middleware=middleware)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 app.include_router(task_controller.router)
 app.include_router(project_controller.router)
