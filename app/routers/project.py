@@ -1,6 +1,6 @@
 from typing import Optional, List
 from pydantic import BaseModel
-from .resources import Resource
+from .resource import Resource
 from enum import Enum
     
 class ProjectStatus(str, Enum):

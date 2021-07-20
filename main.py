@@ -1,6 +1,5 @@
 from fastapi import FastAPI
 from app.routers import task_controller, project_controller
-from starlette.middleware import Middleware
 from starlette.middleware.cors import CORSMiddleware
 
 app = FastAPI()
