@@ -12,6 +12,7 @@ class ProjectRequest(BaseModel):
     nombre: str
     lider_de_equipo: Resource
     personas_asignadas: List[Resource] #despues va a tener que ser una lista de empleados. Lo mismo con Tareas (TODO)
+    fecha: str
 
 class Project(ProjectRequest):
     id: int
