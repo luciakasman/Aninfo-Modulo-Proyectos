@@ -9,14 +9,14 @@ class TaskStatus(str,Enum):
     Terminado = "Terminado"
 
 class TaskRequest(BaseModel):
-    name: str
-    description: str
-    associated_project_id: int
-    assigned_worker: Resource
+    nombre: str
+    descripcion: str
+    id_proyecto_asociado: int
+    persona_asignada: Resource
     fecha_inicio: str
 
 class TaskWithoutId(TaskRequest):
-    status: TaskStatus = TaskStatus.No_Iniciado
+    estado: TaskStatus = TaskStatus.No_Iniciado
     fecha_fin: str = ""
 
 class Task(TaskWithoutId):
