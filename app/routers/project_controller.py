@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from .project import Project, ProjectStatus, ProjectRequest
+from .project import Project, ProjectStatus, ProjectRequest, ProjectWithoutId
 from .helper import Message
 from fastapi.responses import JSONResponse
 import random
@@ -33,7 +33,7 @@ async def create_project(project_request: ProjectRequest):
         return JSONResponse(status_code=404, content={"message": "Error al crear nuevo proyecto"})
 
 @router.put("/{project_id}", description="Update project by Id", responses={404: {"model": Message}})
-def update_project(project_id: int, new_project: Project):
+def update_project(project_id: int, new_project: ProjectWithoutId):
     for project in projects:
         if project.id == project_id:
             projects.remove(project)

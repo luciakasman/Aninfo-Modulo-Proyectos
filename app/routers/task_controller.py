@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from .task import Task, TaskRequest
+from .task import Task, TaskRequest, TaskWithoutId
 from .helper import Message
 from fastapi.responses import JSONResponse
 import random
@@ -33,7 +33,7 @@ async def create_task(task_request: TaskRequest):
         return JSONResponse(status_code=404, content={"message": "Error al crear nueva tarea"})
 
 @router.put("/{task_id}", description="Update task by Id", responses={404: {"model": Message}})
-def update_task(task_id: int, new_task: Task):
+def update_task(task_id: int, new_task: TaskWithoutId):
     for task in tasks:
         if task.id == task_id:
             tasks.remove(task)

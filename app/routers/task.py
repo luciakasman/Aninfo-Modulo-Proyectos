@@ -15,8 +15,10 @@ class TaskRequest(BaseModel):
     assigned_worker: Resource
     fecha_inicio: str
 
-class Task(TaskRequest):
-    id: int
+class TaskWithoutId(TaskRequest):
     status: TaskStatus = TaskStatus.No_Iniciado
     fecha_fin: str = ""
+
+class Task(TaskWithoutId):
+    id: int
     

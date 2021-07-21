@@ -16,8 +16,7 @@ class ProjectRequest(BaseModel):
     fecha_limite_inicio: str
     fecha_estimada_fin: str
 
-class Project(ProjectRequest):
-    id: int
+class ProjectWithoutId(ProjectRequest):
     estado: ProjectStatus = ProjectStatus.No_iniciado
     porcentaje_de_avance: float = 0.0
     fecha_fin: str = ""
@@ -25,3 +24,5 @@ class Project(ProjectRequest):
     class Config:  
         use_enum_values = True
 
+class Project(ProjectWithoutId):
+    id: int
