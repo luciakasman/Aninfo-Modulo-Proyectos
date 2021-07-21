@@ -13,8 +13,10 @@ class TaskRequest(BaseModel):
     description: str
     associated_project_id: int
     assigned_worker: Resource
+    fecha_inicio: str
 
 class Task(TaskRequest):
     id: int
     status: TaskStatus = TaskStatus.No_Iniciado
+    fecha_fin: str = ""
     

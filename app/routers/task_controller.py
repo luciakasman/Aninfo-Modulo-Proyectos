@@ -2,7 +2,8 @@ from fastapi import APIRouter
 from .task import Task, TaskRequest
 from .helper import Message
 from fastapi.responses import JSONResponse
-from uuid import uuid4
+import random
+from datetime import datetime
 
 router = APIRouter(
     prefix="/tasks",
@@ -25,17 +26,18 @@ async def get_task_by_id(task_id: int):
 @router.post("/", description= "Create a new task", responses= {404: {"model": Message}})
 async def create_task(task_request: TaskRequest):
     try:
-        tasks.append(create_new_task(task_request))
-        return "todo liso"
+        random.seed(datetime.now())
+        tasks.append(Task(**task_request.dict(), id = random.randrange(0, 10000)))
+        return "todo ok!"
     except:
         return JSONResponse(status_code=404, content={"message": "Error al crear nueva tarea"})
 
 @router.put("/{task_id}", description="Update task by Id", responses={404: {"model": Message}})
-def update_task(task_id: int, new_task: TaskRequest):
+def update_task(task_id: int, new_task: Task):
     for task in tasks:
         if task.id == task_id:
             tasks.remove(task)
-            tasks.append(create_new_task(new_task))
+            tasks.append(Task(**new_task.dict(), id = task_id))
             return "Se pudo actualizar la tarea correctamente"
     return JSONResponse(status_code=404, content={"message": "No existe la tarea que se desea actualizar"})
 
@@ -46,6 +48,3 @@ def delete_task(task_id: int):
             tasks.remove(task)
             return "Se pudo eliminar la tarea correctamente"
     return JSONResponse(status_code=404, content={"message": "No existe la tarea que se desea eliminar"})
-
-def create_new_task(task_request: TaskRequest):
-    return Task(**task_request.dict(), id = int(uuid4()))
