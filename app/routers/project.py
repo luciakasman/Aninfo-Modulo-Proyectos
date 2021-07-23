@@ -11,7 +11,7 @@ class ProjectStatus(str, Enum):
 class ProjectRequest(BaseModel):
     nombre: str
     lider_de_equipo: Resource
-    personas_asignadas: List[Resource] #despues va a tener que ser una lista de empleados. Lo mismo con Tareas (TODO)
+    personas_asignadas: List[Resource]
     fecha_inicio: str
     fecha_limite_inicio: str
     fecha_estimada_fin: str
