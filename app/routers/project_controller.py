@@ -13,8 +13,6 @@ router = APIRouter(
     tags=["Projects"]
 )
 
-projects = []
-
 @router.get('/',description="Fetch all projects")
 async def get_all_projects():
     return read_json_file()

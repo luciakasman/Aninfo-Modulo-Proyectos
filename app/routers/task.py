@@ -1,6 +1,7 @@
 from typing import Optional, List
 from pydantic import BaseModel
 from .resource import Resource
+from .ticket import Ticket
 from enum import Enum
     
 class TaskStatus(str,Enum):
@@ -14,6 +15,7 @@ class TaskRequest(BaseModel):
     id_proyecto_asociado: int
     persona_asignada: Resource
     fecha_inicio: str
+    tickets: list[Ticket]
 
 class TaskWithoutId(TaskRequest):
     estado: TaskStatus = TaskStatus.No_Iniciado
@@ -21,4 +23,3 @@ class TaskWithoutId(TaskRequest):
 
 class Task(TaskWithoutId):
     id: int
-    
