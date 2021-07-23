@@ -9,6 +9,7 @@
 *.pyc
 Pipfile
 .DS_Store
+*.txt
 
 # Local History for Visual Studio Code
 .history/

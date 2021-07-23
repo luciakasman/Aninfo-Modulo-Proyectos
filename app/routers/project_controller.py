@@ -21,8 +21,9 @@ async def get_all_projects():
 
 @router.get('/{project_id}', description="Fetch a single project by Id", response_model=Project, responses={404: {"model": Message}})
 async def get_project_by_id(project_id: int):
-    for project in projects:
-        if project.id == project_id:
+    all_projects = read_json_file()
+    for project in all_projects:
+        if project["id"] == project_id:
             return project
     return JSONResponse(status_code=404, content={"message": "El proyecto buscado no existe"})
 
