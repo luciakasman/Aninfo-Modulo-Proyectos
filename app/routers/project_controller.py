@@ -26,9 +26,10 @@ async def get_project_by_id(project_id: int):
 @router.post("/", description="Create a new project", responses={404: {"model": Message}})
 async def create_project(project_request: ProjectRequest):
     try:
+        id = random.randrange(0, 10000)
         random.seed(datetime.now())
-        projects.append(Project(**project_request.dict(), id = random.randrange(0, 10000)))
-        return "todo ok!"
+        projects.append(Project(**project_request.dict(), id = id))
+        return id
     except:
         return JSONResponse(status_code=404, content={"message": "Error al crear nuevo proyecto"})
 
