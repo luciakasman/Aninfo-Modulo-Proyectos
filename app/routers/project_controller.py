@@ -40,8 +40,9 @@ def update_project(project_id: int, new_project: ProjectWithoutId):
     all_projects = read_json_file()
     for project in all_projects:
         if project["id"] == project_id:
+            tasks = project["tareas"]
             all_projects.remove(project)
-            all_projects.append(Project(**new_project.dict(), id = project_id))
+            all_projects.append(Project(**new_project.dict(), id = project_id, tareas=tasks))
             update_json_file(all_projects)
             return "Se pudo actualizar el proyecto correctamente"      
     return JSONResponse(status_code=404, content={"message": "No existe el proyecto que se desea actualizar"})
