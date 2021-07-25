@@ -1,9 +1,9 @@
 Feature: Project
 
-  Scenario: 1- Consulto y no hay proyectos existentes - get_all
-    Given que no hay proyectos existentes
+  Scenario: 1- Camino Inicial: Consulto los proyectos - get_all
+    Given soy un usuario y quiero visualizar los proyectos existentes
     When consulto los proyectos
-    Then no me muestra ningún proyecto
+    Then el sistema muestra los proyectos con los datos: nombre, líder de proyecto, personas asignadas que elegí, fecha de inicio, fecha límite de inicio, fecha fin y sus tareas asociadas.
 
  Scenario: 2- Camino A: Como usuario, quiero poder agregar proyectos para consultar y comunicar su situación. - create
     Given que necesito crear proyectos al sistema

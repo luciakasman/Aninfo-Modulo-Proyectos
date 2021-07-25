@@ -1,9 +1,9 @@
 Feature: Task
 
-  Scenario: 1 - Consulto y no hay tareas existentes - get_all
-    Given que no hay tareas existentes
+  Scenario: 1 - Consulto y las tareas existentes - get_all
+    Given que quiero saber los datos de las tareas existentes
     When consulto las tareas
-    Then no me muestra ninguna tarea
+    Then el sistema muestra las tareas con los datos: nombre, descripción, id del proyecto asociado, personas asignadas, fecha de inicio.
 
   Scenario: 2- Como usuario, quiero poder obtener los datos de una tarea para consultar y comunicar su situación. - get_by_id
     Given que soy un usuario y quiero visualizar la información de una tarea

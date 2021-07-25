@@ -11,10 +11,15 @@ body4 = """{"nombre": "Lucas","descripcion": "string", "id_proyecto_asociado": 0
 body4Edited = """{"nombre": "Agustina","descripcion": "string", "id_proyecto_asociado": 0,"persona_asignada": {"resourceID": 0,"name": "string","surname": "string"},"fecha_inicio": "string"}"""
 body5 = """{"nombre": "Martin","descripcion": "string", "id_proyecto_asociado": 0,"persona_asignada": {"resourceID": 0,"name": "string","surname": "string"},"fecha_inicio": "string"}"""
 
-@given('que no hay tareas existentes')
+@given('que quiero saber los datos de las tareas existentes')
 def no_tasks(context):
     global apiUrl
     apiUrl = 'http://127.0.0.1:8000/'
+    bodyJson = json.loads(body2)
+    id = requests.post(completeApi, json=bodyJson).content.decode()
+    bodyJson3 = json.loads(body3)
+    id = requests.post(completeApi, json=bodyJson3).content.decode()
+
 
 @given('que soy un usuario y quiero visualizar la información de una tarea')
 def view_information(context):
@@ -73,9 +78,12 @@ def delete_task(context):
         result = requests.delete(url)
 
 
-@then('no me muestra ninguna tarea')
+@then('el sistema muestra las tareas con los datos: nombre, descripción, id del proyecto asociado, personas asignadas, fecha de inicio.')
 def not_found_tasks(context):
-    assert result.content == empty
+    assert result.status_code == 200
+    assert compareJsons(result.content, body2)
+    assert compareJsons(result.content, body3)
+
 
 @then('el sistema muestra la tarea con los datos: nombre, descripción, id del proyecto asociado, personas asignadas, fecha de inicio.')
 def all_information(context):

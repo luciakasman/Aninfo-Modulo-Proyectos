@@ -12,10 +12,16 @@ body5 = """{"nombre": "Julieta", "lider_de_equipo": {"resourceID": 10, "name": "
 completeApi = 'http://127.0.0.1:8000/projects/'
 
 
-@given('que no hay proyectos existentes')
-def no_projects(context):
+@given('soy un usuario y quiero visualizar los proyectos existentes')
+def view_projects(context):
     global apiUrl
     apiUrl = 'http://127.0.0.1:8000/'
+
+    bodyJson2 = json.loads(body2)
+    id = requests.post(completeApi, json=bodyJson2).content.decode()
+    bodyJson = json.loads(body3)
+    id = requests.post(completeApi, json=bodyJson).content.decode()
+
 
 @given('que necesito crear proyectos al sistema')
 def create_projects(context):
@@ -79,9 +85,12 @@ def delete_project(context):
 
         result = requests.delete(url)
 
-@then('no me muestra ningún proyecto')
+@then('el sistema muestra los proyectos con los datos: nombre, líder de proyecto, personas asignadas que elegí, fecha de inicio, fecha límite de inicio, fecha fin y sus tareas asociadas.')
 def not_found_projects(context):
-    assert result.content == empty
+    assert result.status_code == 200
+    assert compareJsons(result.content, body3)
+    assert compareJsons(result.content, body2)
+
 
 @then('el sistema carga el proyecto con el nombre, líder de proyecto, personas asignadas que elegí, fecha de inicio, fecha límite de inicio, fecha fin.')
 def all_information(context):
