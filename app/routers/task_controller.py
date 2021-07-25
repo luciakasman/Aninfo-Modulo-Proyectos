@@ -29,8 +29,9 @@ async def get_task_by_id(task_id: int):
 @router.post("/", description= "Create a new task", responses= {404: {"model": Message}})
 async def create_task(task_request: TaskRequest):
     try:
+        id = random.randrange(0, 10000)
         random.seed(datetime.now())
-        new_task = Task(**task_request.dict(), id = random.randrange(0, 10000))
+        new_task = Task(**task_request.dict(), id = id)
         projects = read_json_file()
         if projects == []:
             return JSONResponse(status_code=404, content={"message": "No se pueden crear tareas si no existen proyectos."})
@@ -38,7 +39,7 @@ async def create_task(task_request: TaskRequest):
             if project["id"] == task_request.id_proyecto_asociado:
                 project["tareas"].append(new_task)
                 update_json_file(projects)
-                return "todo ok!"
+                return id
     except:
         return JSONResponse(status_code=404, content={"message": "Error al crear nueva tarea"})
 
