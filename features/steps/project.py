@@ -38,7 +38,7 @@ def update_information(context):
     id = requests.post(completeApi, json=bodyJson).content.decode()
 
 @given('que quiero tener actualizados los proyectos')
-def update_information(context):
+def update_projects(context):
     global id
 
     bodyJson = json.loads(body5)
@@ -73,7 +73,7 @@ def modify_project(context):
         result = requests.put(url, json = bodyJson)
 
 @when('un proyecto está en desuso y lo elimino')
-def modify_project(context):
+def delete_project(context):
         global result, url
         url = completeApi + id
 
@@ -84,22 +84,22 @@ def not_found_projects(context):
     assert result.content == empty
 
 @then('el sistema carga el proyecto con el nombre, líder de proyecto, personas asignadas que elegí, fecha de inicio, fecha límite de inicio, fecha fin.')
-def all_projects(context):
+def all_information(context):
     result = requests.get(completeApi)
     assert compareJsons(result.content, body2)
 
 @then( 'el sistema muestra el proyecto con los datos: nombre, líder de proyecto, personas asignadas que elegí, fecha de inicio, fecha límite de inicio, fecha fin y sus tareas asociadas.')
-def all_projects(context):
+def all_information(context):
     assert compareJsons(result.content, body3)
 
 @then( 'el sistema guarda el proyecto con los campos que le modifiqué, que pueden ser: el nombre, líder de proyecto, personas asignadas, fecha de inicio, fecha límite de inicio, fecha fin y/o tareas vinculadas al proyecto.')
-def all_projects(context):
+def save_project(context):
     result = requests.get(url)
     assert compareJsons(result.content, body4Edited)
     assert not compareJsons(result.content, body4)
 
 @then( 'el sistema lo borra y no muestra más su información')
-def all_projects(context):
+def delete_project(context):
     result = requests.get(url)
     assert not compareJsons(result.content, body5)
 

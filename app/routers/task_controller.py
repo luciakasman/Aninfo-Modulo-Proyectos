@@ -26,9 +26,10 @@ async def get_task_by_id(task_id: int):
 @router.post("/", description= "Create a new task", responses= {404: {"model": Message}})
 async def create_task(task_request: TaskRequest):
     try:
+        id = random.randrange(0, 10000)
         random.seed(datetime.now())
-        tasks.append(Task(**task_request.dict(), id = random.randrange(0, 10000)))
-        return "todo ok!"
+        tasks.append(Task(**task_request.dict(), id = id))
+        return id
     except:
         return JSONResponse(status_code=404, content={"message": "Error al crear nueva tarea"})
 
