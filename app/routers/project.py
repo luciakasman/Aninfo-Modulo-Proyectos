@@ -29,4 +29,4 @@ class ProjectWithoutId(ProjectRequest):
 
 class Project(ProjectWithoutId):
     id: int
-    tareas: Optional[list[Task]] = []
+    tareas: Optional[List[Task]] = []

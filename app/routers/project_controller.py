@@ -57,7 +57,7 @@ def delete_project(project_id: int):
             return "Se pudo eliminar el proyecto correctamente"
     return JSONResponse(status_code=404, content={"message": "No existe el proyecto que se desea eliminar"})
 
-def update_json_file(all_projects: list[Project]):
+def update_json_file(all_projects):
     with open("./projects.txt", "w") as projects_file:
         json.dump([jsonable_encoder(project) for project in all_projects], projects_file, indent=2, sort_keys=True)
 

@@ -15,7 +15,7 @@ class TaskRequest(BaseModel):
     id_proyecto_asociado: int
     persona_asignada: Resource
     fecha_inicio: str
-    tickets: list[Ticket]
+    tickets: List[Ticket]
 
 class TaskWithoutId(TaskRequest):
     estado: TaskStatus = TaskStatus.No_Iniciado
